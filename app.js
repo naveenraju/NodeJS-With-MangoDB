@@ -9,7 +9,6 @@ var bodyParser = require('body-parser');
 var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/nodetest2", {native_parser:true});
 //var db = require('mongoskin').db('localhost:27017/nodetest2');
-console.log(db);
 
 
 
@@ -23,9 +22,6 @@ var app = express();
 //make our db acessable
 app.use(function(req,res,next){
     req.db = db;
-console.log("----------------------------Check It Here----------------------");
-console.log(req.db);
-
     next();
 });
 
