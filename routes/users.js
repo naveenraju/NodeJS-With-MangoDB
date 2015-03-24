@@ -55,18 +55,10 @@ router.get('/deleteuser', function(req, res) {
 });
 
 
-
-
-
-
-
-
-
-
-router.get('/ajaxadd', function(req, res) {
+router.post('/ajaxadd', function(req, res) {
     var db = req.db;
-var username=req.query.username;
-var email=req.query.email;
+var username=req.body.username;
+var email=req.body.email;
 console.log(username);
 console.log(email);
  db.collection('usersCollection').insert({"username":username,"email":email,"user_id":""}, function(err, result){
@@ -75,25 +67,6 @@ console.log(email);
         );
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

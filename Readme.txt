@@ -150,7 +150,7 @@ o/p:RestFull call
 Step18: Saving Data in Mongo using NodeJs Ajax Call
 
 
-//--------------Saving Data AjaxRequest -------------------
+--------------------------------------------------------Saving Data AjaxRequest -----------------------------
 //Hit this url to save data in mongo db
 //http://172.16.0.178:3000/users/adduser?username=naveen&&email=naven@gmail.com&&fullname=naveenraju&&age=25&&location=bang&&gender=male
 // {"username":username,"email":email,"fullname":fullname,"age":age,"location":location,"gender":gender} : { msg: err }
@@ -188,6 +188,7 @@ console.log(gender);
 
 
 
+--------------------------------------------Making Ajax Get Request--------------------------------------------
 
 
 
@@ -250,4 +251,63 @@ console.log(email);
         );
     });
 });
+
+
+
+
+
+
+-------------------------------------------Making Ajax Post Request----------------------------------------
+
+Step22: routes/users/     replace get request to
+
+outer.post('/ajaxadd', function(req, res) {
+    var db = req.db;
+var username=req.body.username;
+var email=req.body.email;
+console.log(username);
+console.log(email);
+ db.collection('usersCollection').insert({"username":username,"email":email,"user_id":""}, function(err, result){
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+});
+
+
+
+
+Step23: Ajax Call Post
+
+
+<html>
+<head>
+<script src="../javascripts/jquary.js "></script>
+<script>
+	function AjaxCall(){
+		var username=$(".username").val();
+		var mail=$(".email").val();
+$.ajax({
+     url: '../users/ajaxadd',
+      type: 'POST',
+      data:{
+      	"username":username,
+      	"email":mail
+      },
+      error: function() {
+         alert("error");
+      },
+      success: function(data) {
+        alert("Success");
+      },
+   });
+	} 
+</script>
+</head>
+<body>
+<input type="text" name="username" class="username"  />
+<input type="text" name="email" class="email"  />
+<input type="button" name="" value="Click Me" onclick="AjaxCall()" />
+</body>
+</html>
 
