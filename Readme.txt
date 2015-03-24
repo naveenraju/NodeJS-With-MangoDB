@@ -189,3 +189,65 @@ console.log(gender);
 
 
 
+
+
+
+Step19: Copy your html files in public folder
+
+
+public/Naveen/index.html
+
+
+Access url in browser: http://localhost:3000/Naveen/index.html
+
+
+step20: index.html  implementing ajax request
+
+<html>
+<head>
+<script src="../javascripts/jquary.js "></script>
+<script>
+	function AjaxCall(){
+		var username=$(".username").val();
+		var mail=$(".email").val();
+$.ajax({
+     url: '../users/ajaxadd',
+      type: 'GET',
+      data:{
+      	"username":username,
+      	"email":mail
+      },
+      error: function() {
+         alert("error");
+      },
+      success: function(data) {
+        alert("Success");
+      },
+   });
+	}
+</script>
+</head>
+<body>
+<input type="text" name="username" class="username"  />
+<input type="text" name="email" class="email"  />
+<input type="button" name="" value="Click Me" onclick="AjaxCall()" />
+</body>
+</html>
+
+
+
+step21: routes/users/     add
+
+router.get('/ajaxadd', function(req, res) {
+    var db = req.db;
+var username=req.query.username;
+var email=req.query.email;
+console.log(username);
+console.log(email);
+ db.collection('usersCollection').insert({"username":username,"email":email,"user_id":""}, function(err, result){
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+});
+

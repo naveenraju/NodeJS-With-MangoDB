@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+
+<script src="../javascripts/jquary.js "></script>
+
+<script>
+	function AjaxCall(){
+
+		
+		var username=$(".username").val();
+		var mail=$(".email").val();
+
+$.ajax({
+     url: '../users/ajaxadd',
+      type: 'GET',
+      data:{
+      	"username":username,
+      	"email":mail
+      },
+      error: function() {
+         alert("error");
+      },
+      success: function(data) {
+        alert("Success");
+      },
+     
+   });
+
+	}
+</script>
+</head>
+
+<body>
+
+<input type="text" name="username" class="username"  />
+<input type="text" name="email" class="email"  />
+<input type="button" name="" value="Click Me" onclick="AjaxCall()" />
+</body>
+
+
+
+
+</html>
